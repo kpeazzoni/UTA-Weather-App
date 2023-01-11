@@ -19,48 +19,56 @@ function searchSubmit(event) {
 
 function fetchCurrentWeather(city) {
     var apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&q=${city}&units=imperial`;
-    fetch(apiUrlWeather).then(function (results){
+    fetch(apiUrlWeather).then((results) => {
+        console.log('data: ' + results);  
         return results.json();
     })
     .then(function(data){
-        displayCurrentWeather(data);
+        displayCurrentWeather(data, city);
+        fetchFiveDayWeather(data);
+        console.log(data);
     })
 }
 // weather = data from line 26
-function displayCurrentWeather(weather) {
+function displayCurrentWeather(weather, cityName) {
     var city = document.createElement('h3');
-    city.textContent = weather.name;
-    console.log(city)
+    city.textContent = cityName;
+
     var dateEl = document.createElement('p');
     dateEl.textContent = 'Today: ' + dayjs.unix(weather.dt).format('MM/DD/YYYY');
+
     var iconUrl = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
     var icon = document.createElement('img');
     icon.setAttribute('src', iconUrl);
-    icon.setAttribute('alt', weather.weather[0].description)
+    icon.setAttribute('alt', weather.weather[0].description);
+
     var tempEl = document.createElement('p');
     tempEl.textContent = 'Temp: ' + weather.main.temp + ' F';
+
     var humidityEl = document.createElement('p');
     humidityEl.textContent ='Humidity: ' +  weather.main.humidity + '%';
+
     var windEl = document.createElement('p');
     windEl.textContent = 'Wind speed: ' + weather.wind.speed + 'mph';
+
     currentWeather.append(city, dateEl,icon, tempEl, humidityEl, windEl,);
 }
 
 function fetchFiveDayWeather(city) {
-    var apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
-        fetch(apiUrlForecast).then (function (results) {
-        return results.jason();
+    const apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${city.coord.lat}&lon=${city.coord.lon}&units=imperial&appid=${apiKey}`;
+    const fiveDayWeather = document.createElement('div');
+    fetch(apiUrlForecast).then((results) => {
+        console.log('data: ' + results);  
+        return results.json();
     })
-    .then(function(data) {
-        console.log(data);  
-        displayFiveDayWeather(data);
-    })
+    .then((data) => {   
+        const forecastData = data.list;
+        for (var i = 0; i < data.list.length; i++) {
+            displayCurrentWeather(data.list[i]);
+        }
 
-    function displayFiveDayWeather (weather) {
-        var fiveDayWeather = document.createElement('div');
-        fiveDayWeather.textContent = data.list
-        console.log(weather);
-    }
+    });
+   
  }
 
 

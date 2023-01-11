@@ -1,0 +1,50 @@
+:root {
+  --primary: #082a74;
+  --secondary: #a4dcf8;
+  --tertiary: #788085;
+  --light-dark: #66666f;
+  --dark: #14193a;
+  --border-radius: .3rem;
+}
+
+html {
+    line-height: 1.15;  
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  body {
+    margin: 0;
+  }
+  .header {
+      background:var(--primary);
+      text-align: center;
+      width: 100%;
+      height: auto;
+      background-size: cover;
+      background-attachment: fixed;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 0 85% 85% / 40%;
+      color:aliceblue
+    }
+
+  main {
+    display: block;
+  }
+  
+  h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+  }
+  .card-header {
+    color: white;
+    background-color: var(--dark);
+    margin-top: 3%;
+    padding: 2%;
+    width:50%;
+  }
+  
+  .card-body {
+    border:#14193a
+    padding: 2.5%;
+  }
