@@ -4,27 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="assets/css/script.css"/>
     <title>Weather App</title>
 </head>
 
 <body>
-    <header class= "header p-3 text">
+    <header class= "bg-header text-center p-2">
       <h1>IS IT RAINING?</h1>
         
     </header>
-   <main>
-    <div class="card flex-row align-center justify-center min-100-vh bg-primary">
-      <div class="container col-12 col-md-9 flex-column align-center bg-light p-5"></div>
-    <h1 class ="card-header text-primary"><b>Search a city</b></h1>
-    <input id="search-form" class="form w-100" type="text" placeholder="Search!" style="margin:auto">
-    <button class="btn btn-info btn-block" id="citySearch" style="width: 100px" >Click me!</button>
-    <div id="current-weather">
-    </div>
-
-    <div class="past-searches border" id="past-searches-buttons"></div>
-    <br>
+   <main class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-3 p-2 search-column">
+        <form class="border p-2" id="city-search">
+          <h1>Search a city</h1>
+            <input id="search-form" class="form w-100" autofocus="true" type="text" placeholder="Search a city!" style="margin:auto">
+            <button class="btn btn-light btn-block" id="citySearch" style="width: 100px" >Click me!</button>
+        </form>
+        <div class="past-searches w-100 border" id="past-search-btns"></div>
+      </div>
+      <div class="col-12 col-md-9">
+          <div class="row border selected-city" id="current-forecast">
+              <div class="col-12">
+                  <h2 id="searched-city"></h2>
+                  <div id="current-weather-container" class="list-group"></div>
+              </div>  
+          </div>
+          <div class="row border" id="five-day-forecast">
+              <h2 class="col-12" id="forecast"></h2>
+              <div class="d-flex" id="five-day-container"></div>
+          </div>
+      </div>
+  </div>
+</main>
     <!-- <div class="flex-row align-start align-stretch-md align-content-start align-content-stretch-md min-100-vh bg-primary">
       <div class="col-12 col-md-3 bg-light p-3">
         <h1 class="text-primary">Library of Congress Search Engine</h1>
@@ -43,8 +57,6 @@
           </select>
           <button class="btn btn-info btn-block">Search</button>
         </form> -->
-
-   </main>
    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"
       integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg=="
