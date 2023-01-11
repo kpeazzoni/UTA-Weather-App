@@ -15,22 +15,35 @@
         
     </header>
    <main>
-    <div class="card">
-    </div>
-    <h3 class ="card-header text-uppercase">Search a city</h3>
-    <input>
-    <button id="citySearch">Submit</button>
+    <div class="card flex-row align-center justify-center min-100-vh bg-primary">
+      <div class="container col-12 col-md-9 flex-column align-center bg-light p-5"></div>
+    <h1 class ="card-header text-primary"><b>Search a city</b></h1>
+    <input id="search-form" class="form w-100" type="text" placeholder="Search!" style="margin:auto">
+    <button class="btn btn-info btn-block" id="citySearch" style="width: 100px" >Click me!</button>
     <div id="current-weather">
     </div>
+
+    <div class="past-searches border" id="past-searches-buttons"></div>
     <br>
-    <div class="card">
-    </div>
-    <h3 class ="card-header text-uppercase">Search a city</h3>
-    <input>
-    <button id="citySearch">Submit</button>
-    <div id="current-weather">
-    </div>
-    <br>
+    <!-- <div class="flex-row align-start align-stretch-md align-content-start align-content-stretch-md min-100-vh bg-primary">
+      <div class="col-12 col-md-3 bg-light p-3">
+        <h1 class="text-primary">Library of Congress Search Engine</h1>
+        <form id="search-form" class="mb-2">
+          <input id="search-input" class="form-input w-100" type="text" placeholder="Search!">
+          <select id="format-input" class="form-input w-100">
+            <option value="" disabled selected>Select a format...</option>
+            <option value="maps">Maps</option>
+            <option value="audio">Audio</option>
+            <option value="photos">Photos</option>
+            <option value="manuscripts">Manuscripts</option>
+            <option value="newspapers">Newspapers</option>
+            <option value="film-and-videos">Film and Videos</option>
+            <option value="notated-music">Notated Music</option>
+            <option value="websites">Websites</option>
+          </select>
+          <button class="btn btn-info btn-block">Search</button>
+        </form> -->
+
    </main>
    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"
