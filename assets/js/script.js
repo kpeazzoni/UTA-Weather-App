@@ -11,12 +11,16 @@ var searchInput = document.querySelector('input');
 submitbtn.addEventListener('click', searchSubmit);
 
 function searchSubmit(event) {
+    event.preventDefault()
+    console.log(searchInput.value);  
+    console.log('clicked', event);
     if (!searchInput.value) {
         return;
     } else {
         var city = searchInput.value.trim();
-        fetchCurrentWeather(city);
-        searchInput.value = "";
+        console.log(city);  
+       fetchCurrentWeather(city);
+       searchInput.value = "";
     }
 }
 
@@ -25,8 +29,11 @@ function fetchCurrentWeather(city) {
     fetch(apiUrlWeather).then((results) => {
         console.log('data: ' + results);  
         return results.json();
+    }).catch((error) => {
+        console.log(error);
     })
     .then(function(data)    {
+        console.log(data);
         displayCurrentWeather(data, city);
         fetchFiveDayWeather(data);
         console.log(data);
@@ -54,7 +61,7 @@ function displayCurrentWeather(weather, cityName) {
     var windEl = document.createElement('p');
     windEl.textContent = 'Wind speed: ' + weather.wind.speed + 'mph';
 
-    currentWeather.append(city, dateEl,icon, tempEl, humidityEl, windEl,);  
+    currentWeather.append(city, dateEl,icon, tempEl, humidityEl, windEl);  
 }
 
 function fetchFiveDayWeather(city) {
@@ -73,10 +80,10 @@ function fetchFiveDayWeather(city) {
    
  }
 
- function saveCitySearch() {
-    localStorage.setItem('Cities', weather.main)
-    console.log('cities', weather.main)
- }
+//  function saveCitySearch() {
+//     localStorage.setItem('Cities', weather.main)
+//     console.log('cities', weather.main)
+//  }
 
 
 // history- on click for past city buttons will just need to run the city search again

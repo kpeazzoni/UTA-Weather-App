@@ -41,16 +41,23 @@ h1 {
   color:white;
 }
 
-.border {
-  
+#city-search {
+  border: thick double #32a1ce;
 }
 
 .card-body {
-  border:#14193a
+  border: thick double #32a1ce;
+  /* border:#14193a */
   padding: 2.5%;
 }
 
+.selected-city {
+  border: thick double #32a1ce;
+}
 
+#current-forecast{
+  
+}
 
 
   /* .header {
