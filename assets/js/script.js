@@ -7,9 +7,11 @@ var apiKey = 'ea1cfe6f6396974dcf51cb771e7643a2';
 var currentWeather = document.getElementById('current-weather');
 var submitbtn = document.getElementById('citySearch');
 var searchInput = document.querySelector('input');
+var displayFiveDay = document.getElementById('display-five-day');
 
 submitbtn.addEventListener('click', searchSubmit);
 
+// city search button
 function searchSubmit(event) {
     event.preventDefault()
     console.log(searchInput.value);  
@@ -18,73 +20,36 @@ function searchSubmit(event) {
         return;
     } else {
         var city = searchInput.value.trim();
-        console.log(city);  
-    //    fetchCurrentWeather(city);
-          fetchFiveDayWeather(city);
+        fetchCurrentWeather(city);
+        fetchFiveDayWeather(city);
        searchInput.value = "";
     }
+    // saveSearch();
 }
-
-// function fetchCurrentWeather(city) {
-//     var apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&q=${city}&units=imperial`;
-//     fetch(apiUrlWeather).then((results) => {
-//         console.log('data: ' + results);  
-//         return results.json();
-//     }).catch((error) => {
-//         console.log(error);
-//     })
-//     .then(function(data)    {
-//         console.log(data);
-//         displayCurrentWeather(data, city);
-//         fetchFiveDayWeather(data);
-//         console.log(data);
-//     })
-// }
-// // weather = data from line 26
-// function displayCurrentWeather(weather, cityName) {
-//     var city = document.createElement('h3');
-//     city.textContent = cityName;
-
-//     var dateEl = document.createElement('p');
-//     dateEl.textContent = 'Today: ' + dayjs.unix(weather.dt).format('MM/DD/YYYY');
-
-//     var iconUrl = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
-//     var icon = document.createElement('img');
-//     icon.setAttribute('src', iconUrl);
-//     icon.setAttribute('alt', weather.weather[0].description);
-
-//     var tempEl = document.createElement('p');
-//     tempEl.textContent = 'Temp: ' + weather.main.temp + ' °F';
-
-//     var humidityEl = document.createElement('p');
-//     humidityEl.textContent ='Humidity: ' +  weather.main.humidity + '%';
-
-//     var windEl = document.createElement('p');
-//     windEl.textContent = 'Wind speed: ' + weather.wind.speed + 'mph';
-
-//     currentWeather.append(city, dateEl,icon, tempEl, humidityEl, windEl);  
-// }
-
-
-
-function fetchFiveDayWeather(city) {
-    const apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
-    const fiveDayWeather = document.createElement('div');
-    fetch(apiUrlForecast).then((results) => {
-        console.log('data: ' + results);    
-        return results.json();
-    })
-    .then((data) => {   
-        const forecastData = data.list;
-        for (var i = 0; i < data.list.length; i++) {
-            displayFiveDayWeather(data.list[i]);
-        }
-    });
-   
+function saveSearch() {
+    localStorage.setItem('cities', JSON.stringify(main.name))
+    console.log('cities', JSON.stringify(main.name))
  }
- function displayFiveDayWeather(weather) {
-    // var city = document.createElement('h3');
-    // city.textContent = cityName;
+
+//  current day weather fetch
+function fetchCurrentWeather(city) {
+    var apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&q=${city}&units=imperial`;
+    fetch(apiUrlWeather).then((results) => {
+        console.log('data: ' + results);  
+        return results.json();
+    }).catch((error) => {
+        console.log(error);
+    })
+    .then(function(data)    {
+        console.log(data);
+        displayCurrentWeather(data, city);
+        console.log(data);
+    })
+}
+// // weather = data from line 26
+function displayCurrentWeather(weather, cityName) {
+    var city = document.createElement('h3');
+    city.textContent = cityName;
 
     var dateEl = document.createElement('p');
     dateEl.textContent = 'Today: ' + dayjs.unix(weather.dt).format('MM/DD/YYYY');
@@ -103,15 +68,57 @@ function fetchFiveDayWeather(city) {
     var windEl = document.createElement('p');
     windEl.textContent = 'Wind speed: ' + weather.wind.speed + 'mph';
 
-    currentWeather.append(dateEl,icon, tempEl, humidityEl, windEl);  
+    currentWeather.append(city, dateEl,icon, tempEl, humidityEl, windEl);  
 }
 
- function saveCitySearch() {
-    localStorage.setItem('Cities', weather.main)
-    console.log('cities', weather.main)
+
+// five day weather fetch
+function fetchFiveDayWeather(city) {
+    const apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
+    const fiveDayWeather = document.getElementById('fiveday-weather');
+   
+    fetch(apiUrlForecast)
+    .then((results) => {  
+        return results.json();
+    })
+    .then((data) => {   
+        displayFiveDayWeather(data);
+    });
+   
  }
+ function displayFiveDayWeather(weather) {
+    var fiveDayForecast = weather.list
+    for (var i = 0; i < weather.length; i=+8) {
+    var DailyFiveDayForecast = forecastData[i];
+        }
+    
+    var dateEl = document.createElement('p');
+    dateEl.textContent = '  : ' + dayjs.unix(weather.dt).format('MM/DD/YYYY');
 
+    var iconUrl = `https://openweathermap.org/img/w/${weather.icon}.png`;
+    var icon = document.createElement('img');
+    icon.setAttribute('src', iconUrl);
+    icon.setAttribute('alt', weather.icon);
 
+    var tempEl = document.createElement('p');
+    tempEl.textContent = 'Temp: ' + weather.main.temp + ' °F';
+
+    var humidityEl = document.createElement('p');
+    humidityEl.textContent ='Humidity: ' +  weather.main.humidity + '%';
+
+    var windEl = document.createElement('p');
+    windEl.textContent = 'Wind speed: ' + weather.wind.speed + 'mph';
+
+    displayFiveDay.append(dateEl, icon, tempEl, humidityEl, windEl);  
+}
+
+// var pastSearches = function(event) {
+//     var pastCityEl = document.createElement("button");
+//     pastCityEl.textContent = //past city?;
+// }
+// pastCityEl.addEventListener("click", pastSearches);
+
+// displayFiveDayWeather(data.list[i]);
 // history- on click for past city buttons will just need to run the city search again
 
 // for the 5 day: call it at the same time you cal display current weather- pass over data.cord.lat, data.cord.long
