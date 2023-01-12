@@ -41,6 +41,10 @@ h1 {
   color:white;
 }
 
+.current-weather-container{
+  border:double blue
+}
+
 #city-search {
   border: thick double #32a1ce;
 }
@@ -55,9 +59,55 @@ h1 {
   border: thick double #32a1ce;
 }
 
-#current-forecast{
-  
+#today-city-weather {
+  display: inline-block;
+  text-align: center;
 }
+
+#today-date {
+  display: inline-block;
+  text-align: center;
+}
+
+#weather-icon {
+  display: inline-block;
+  text-align: center;
+}
+
+.day1-container{
+  border:double blue
+}
+
+#city-search {
+  border: thick double #32a1ce;
+}
+
+.card-body {
+  border: thick double #32a1ce;
+  /* border:#14193a */
+  padding: 2.5%;
+}
+
+.selected-city {
+  border: thick double #32a1ce;
+}
+
+#today-city-weather {
+  display: inline-block;
+  text-align: center;
+}
+
+#today-date {
+  display: inline-block;
+  text-align: center;
+}
+
+#weather-icon {
+  display: inline-block;
+  text-align: center;
+}
+
+
 
 
   /* .header {

@@ -30,7 +30,25 @@
         </form>
         <div class="past-searches w-100 border" id="past-search-btns"></div>
       </div>
-      <div class="current-weather-container col-12 col-md-5">
+
+      <div id="current-weather" class="current-weather-container col-8 justify-content-center">
+        <div class="row">
+          <div
+            id="today-city-weather"
+            class="col-12 border rounded px-3 py-3 align-items-center"
+          >
+            <h3 id="city-heading" class="flex"></h3>
+            <p id="today-date" class="flex"></p>
+            <div id="weather-icon">,</div>
+            <p id="today-temp"></p>
+            <p id="today-wind"></p>
+            <p id="today-humidity"></p>
+            <!-- searched city -->
+          </div>
+        </div> 
+      </div> 
+
+      <!-- <div class="current-weather-container col-12 col-md-5">
           <div class="row border selected-city" id="current-forecast">
               <div class="col-12">
                   <h2 id="searched-city"></h2>
@@ -42,7 +60,27 @@
               <div class="d-flex" id="five-day-container"></div>
           </div>
       </div>
-  </div>
+  </div> -->
+    <!-- 5days weather header -->
+    <div id="day1-weather" class="day1-weather-container col-8 justify-content-center"></div>
+    <div class="row">
+      <div class="col-12">
+        <h2>5 Day Forecast:</h2>
+      </div>
+    </div>
+
+    <!-- 5 days weather details -->
+    <div id="fivedays-city-weather" class="row"></div>
+  
+</div>
+</div>
+
+<!-- div for search history ?-->
+
+<!-- div for today-weather -->
+
+<!-- heading - 5day forecast -->
+<!-- div 5day weather --> 
 </main>
     <!-- <div class="flex-row align-start align-stretch-md align-content-start align-content-stretch-md min-100-vh bg-primary">
       <div class="col-12 col-md-3 bg-light p-3">
