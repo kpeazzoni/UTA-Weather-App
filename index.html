@@ -20,7 +20,7 @@
       <h1>IS IT RAINING?</h1>
         
     </header>
-   <main class="container-fluid">
+  <main class="container-fluid">
     <div class="row">
       <div class="col-12 col-md-3 p-2 search-column">
         <form class="border p-2" id="city-search">
@@ -32,49 +32,28 @@
       </div>
 
       <div id="current-weather" class="current-weather-container col-8 justify-content-center">
-        <div class="row">
-          <div
-            id="today-city-weather"
-            class="col-12 border rounded px-3 py-3 align-items-center"
-          >
-            <h3 id="city-heading" class="flex"></h3>
+        <h1 id="current-title">Today's Weather:</h1>
+            <h2 id="city-heading" style="font-size:larger" class="flex"></h2>
             <p id="today-date" class="flex"></p>
-            <div id="weather-icon">,</div>
+            <div id="weather-icon"></div>
             <p id="today-temp"></p>
             <p id="today-wind"></p>
             <p id="today-humidity"></p>
             <!-- searched city -->
           </div>
         </div> 
-      </div> 
 
-      <!-- <div class="current-weather-container col-12 col-md-5">
-          <div class="row border selected-city" id="current-forecast">
-              <div class="col-12">
-                  <h2 id="searched-city"></h2>
-                  <div id="current-weather" class="container list-group"></div>
-              </div>  
-          </div>
-          <div class="row border" id="five-day-forecast">
-              <h2 class="col-12" id="forecast"></h2>
-              <div class="d-flex" id="five-day-container"></div>
-          </div>
-      </div>
-  </div> -->
     <!-- 5days weather header -->
-    <main class="display-five-day container-fluid"></main>
+    <section class="container-fluid" id="display-five-day"></section>
     <div id="day1-weather" class="day1-weather-container col-8 justify-content-center"></div>
     <div class="row">
       <div class="col-12">
-        <h2>5 Day Forecast:</h2>
+        <!-- <h2>5 Day Forecast:</h2> -->
       </div>
     </div>
 
     <!-- 5 days weather details -->
     <div id="fiveday-weather" class="row"></div>
-  
-</div>
-</div>
 
 <!-- div for search history ?-->
 
@@ -83,25 +62,6 @@
 <!-- heading - 5day forecast -->
 <!-- div 5day weather --> 
 </main>
-    <!-- <div class="flex-row align-start align-stretch-md align-content-start align-content-stretch-md min-100-vh bg-primary">
-      <div class="col-12 col-md-3 bg-light p-3">
-        <h1 class="text-primary">Library of Congress Search Engine</h1>
-        <form id="search-form" class="mb-2">
-          <input id="search-input" class="form-input w-100" type="text" placeholder="Search!">
-          <select id="format-input" class="form-input w-100">
-            <option value="" disabled selected>Select a format...</option>
-            <option value="maps">Maps</option>
-            <option value="audio">Audio</option>
-            <option value="photos">Photos</option>
-            <option value="manuscripts">Manuscripts</option>
-            <option value="newspapers">Newspapers</option>
-            <option value="film-and-videos">Film and Videos</option>
-            <option value="notated-music">Notated Music</option>
-            <option value="websites">Websites</option>
-          </select>
-          <button class="btn btn-info btn-block">Search</button>
-        </form> -->
-   
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

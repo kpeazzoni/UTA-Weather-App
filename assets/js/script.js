@@ -14,38 +14,32 @@ submitbtn.addEventListener('click', searchSubmit);
 // city search button
 function searchSubmit(event) {
     event.preventDefault()
-    console.log(searchInput.value);  
-    console.log('clicked', event);
     if (!searchInput.value) {
         return;
     } else {
-        var city = searchInput.value.trim();
-        fetchCurrentWeather(city);
+        var city = searchInput.value.toUpperCase().trim();
+       fetchCurrentWeather(city);
         fetchFiveDayWeather(city);
        searchInput.value = "";
     }
     // saveSearch();
 }
-function saveSearch() {
-    localStorage.setItem('cities', JSON.stringify(main.name))
-    console.log('cities', JSON.stringify(main.name))
- }
+
 
 //  current day weather fetch
 function fetchCurrentWeather(city) {
     var apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&q=${city}&units=imperial`;
     fetch(apiUrlWeather).then((results) => {
-        console.log('data: ' + results);  
         return results.json();
-    }).catch((error) => {
-        console.log(error);
     })
     .then(function(data)    {
-        console.log(data);
         displayCurrentWeather(data, city);
-        console.log(data);
     })
 }
+// function saveSearch() {
+//     localStorage.setItem('cities', data.city.name)
+//     console.log('save seraches', data.city.name)
+//  }
 // // weather = data from line 26
 function displayCurrentWeather(weather, cityName) {
     var city = document.createElement('h3');
@@ -86,30 +80,33 @@ function fetchFiveDayWeather(city) {
     });
    
  }
- function displayFiveDayWeather(weather) {
-    var fiveDayForecast = weather.list
-    for (var i = 0; i < weather.length; i=+8) {
-    var DailyFiveDayForecast = forecastData[i];
-        }
-    
-    var dateEl = document.createElement('p');
-    dateEl.textContent = '  : ' + dayjs.unix(weather.dt).format('MM/DD/YYYY');
+ function displayFiveDayWeather(allWeatherData) {
+    var fiveDayForecast = allWeatherData.list;
+    console.log("five", fiveDayForecast);
+    for (var i = 0; i < fiveDayForecast.length; i=i+8) {
+       
+       displayFiveDay.classList = "card-body text-center";
+        var dailyFiveDayForecast = fiveDayForecast[i];
+       
+        var dateEl = document.createElement('p');
+        dateEl.textContent = 'date: ' + dayjs.unix(dailyFiveDayForecast.dt).format('MM/DD/YYYY');
 
-    var iconUrl = `https://openweathermap.org/img/w/${weather.icon}.png`;
-    var icon = document.createElement('img');
-    icon.setAttribute('src', iconUrl);
-    icon.setAttribute('alt', weather.icon);
+        var iconUrl = `https://openweathermap.org/img/w/${dailyFiveDayForecast.weather[0].icon}.png`;
+        var icon = document.createElement('img');
+        icon.setAttribute('src', iconUrl);
+        icon.setAttribute('alt', dailyFiveDayForecast.main.icon);
 
-    var tempEl = document.createElement('p');
-    tempEl.textContent = 'Temp: ' + weather.main.temp + ' °F';
+        var tempEl = document.createElement('p');
+        tempEl.innerHTML = 'Temp: ' + dailyFiveDayForecast.main.temp + ' °F';
 
-    var humidityEl = document.createElement('p');
-    humidityEl.textContent ='Humidity: ' +  weather.main.humidity + '%';
+        var humidityEl = document.createElement('p');
+        humidityEl.textContent ='Humidity: ' +  dailyFiveDayForecast.main.humidity + '%';
 
-    var windEl = document.createElement('p');
-    windEl.textContent = 'Wind speed: ' + weather.wind.speed + 'mph';
+        var windEl = document.createElement('p');
+        windEl.textContent = 'Wind speed: ' + dailyFiveDayForecast.wind.speed + 'mph';
 
-    displayFiveDay.append(dateEl, icon, tempEl, humidityEl, windEl);  
+        displayFiveDay.append(dateEl, icon, tempEl, humidityEl, windEl);  
+}
 }
 
 // var pastSearches = function(event) {
@@ -151,3 +148,5 @@ function fetchFiveDayWeather(city) {
 
 //     currentWeather.append(city, dateEl, icon, tempEl, humidityEl, windEl);  
 // }
+
+// dummy data:
