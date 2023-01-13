@@ -38,6 +38,9 @@ h1 {
 h2 {
   font-size:30px;
 }
+.h3{
+  font-size: 20px;
+}
 .btn {
   background-color:var(--dark);
   color:white;
@@ -51,13 +54,17 @@ h2 {
   border: thick double #32a1ce;
 }
 
-.card-body {
+.card{
   border: thick double #32a1ce;
   /* border:#14193a */
   padding: 2.5%;
+
+}
+#display-five-day{
+  flex-wrap:wrap; 
 }
 
-.selected-city {
+/* .selected-city {
   border: thick double #32a1ce;
 }
 
@@ -74,9 +81,9 @@ h2 {
 #weather-icon {
   display: inline-block;
   text-align: center;
-}
+} */ 
 
-.day1-container{
+/* .day1-container{
   border:double blue
 }
 
@@ -84,12 +91,6 @@ h2 {
   border: thick double #32a1ce;
 }
 
-.card-body {
-  border: thick double #32a1ce;
-  /* border:#14193a */
-  padding: 2.5%;
-}
-
 .selected-city {
   border: thick double #32a1ce;
 }
@@ -107,7 +108,7 @@ h2 {
 #weather-icon {
   display: inline-block;
   text-align: center;
-}
+} */
 
 
 

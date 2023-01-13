@@ -85,11 +85,19 @@ function fetchFiveDayWeather(city) {
     console.log("five", fiveDayForecast);
     for (var i = 0; i < fiveDayForecast.length; i=i+8) {
        
-       displayFiveDay.classList = "card-body text-center";
+        var cardEl= document.createElement('div');
+        var cardHeadingEl = document.createElement('h3');
+        var cardBodyEl = document.createElement('div');
+        
+        cardEl.classList = "card mx-2"
+        cardHeadingEl.classList = "card-title text-center d-flex h3";
+        cardBodyEl.classList = "card-body text-center";
+        // displayFiveDay.classList = "d-flex";
+        
         var dailyFiveDayForecast = fiveDayForecast[i];
        
         var dateEl = document.createElement('p');
-        dateEl.textContent = 'date: ' + dayjs.unix(dailyFiveDayForecast.dt).format('MM/DD/YYYY');
+        dateEl.textContent = 'DATE: ' + dayjs.unix(dailyFiveDayForecast.dt).format('MM/DD/YYYY');
 
         var iconUrl = `https://openweathermap.org/img/w/${dailyFiveDayForecast.weather[0].icon}.png`;
         var icon = document.createElement('img');
@@ -105,10 +113,13 @@ function fetchFiveDayWeather(city) {
         var windEl = document.createElement('p');
         windEl.textContent = 'Wind speed: ' + dailyFiveDayForecast.wind.speed + 'mph';
 
-        displayFiveDay.append(dateEl, icon, tempEl, humidityEl, windEl);  
+        cardEl.append(cardHeadingEl);
+        cardHeadingEl.append(dateEl, icon)
+        cardBodyEl.append(tempEl, humidityEl, windEl);
+        cardEl.append(cardBodyEl);
+        displayFiveDay.append(cardEl);  
 }
 }
-
 // var pastSearches = function(event) {
 //     var pastCityEl = document.createElement("button");
 //     pastCityEl.textContent = //past city?;
@@ -121,32 +132,3 @@ function fetchFiveDayWeather(city) {
 // for the 5 day: call it at the same time you cal display current weather- pass over data.cord.lat, data.cord.long
 // fetchFiveDay- going to do the same thing as 21-25 only with the forecast URL var apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
 //  data.list- 40 elements of forecast for 5 days. loop over that list and make a card with the data just like display current weather but loop with a +=8- 
-
-
-
-
-// function displayCurrentWeather(weather, cityName) {
-//     var city = document.getElementById('city-heading');
-//     city.textContent = weather.main.name;
-
-//     var dateEl = document.getElementById('today-date');
-//     dateEl.textContent = 'Today: ' + dayjs.unix(weather.dt).format('MM/DD/YYYY');
-
-//     var iconUrl = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
-//     var icon = document.getElementById('weather-icon');
-//     icon.setAttribute('src', iconUrl);
-//     icon.setAttribute('alt', weather.weather[0].description);
-
-//     var tempEl = document.getElementById('today-temp');
-//     tempEl.textContent = 'Temp: ' + weather.main.temp + ' °F';
-
-//     var humidityEl = document.getElementById('today-humidity');
-//     humidityEl.textContent ='Humidity: ' +  weather.main.humidity + '%';
-
-//     var windEl = document.getElementById('today-wind');
-//     windEl.textContent = 'Wind speed: ' + weather.wind.speed + 'mph';
-
-//     currentWeather.append(city, dateEl, icon, tempEl, humidityEl, windEl);  
-// }
-
-// dummy data:
