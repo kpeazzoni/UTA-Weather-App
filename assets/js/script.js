@@ -8,8 +8,10 @@ var currentWeather = document.getElementById('current-weather');
 var submitbtn = document.getElementById('citySearch');
 var searchInput = document.querySelector('input');
 var displayFiveDay = document.getElementById('display-five-day');
+var pastSearchBtnEl = document.querySelector("#past-search-buttons");
 
 submitbtn.addEventListener('click', searchSubmit);
+
 
 // city search button
 function searchSubmit(event) {
@@ -19,11 +21,12 @@ function searchSubmit(event) {
     } else {
         var city = searchInput.value.toUpperCase().trim();
        fetchCurrentWeather(city);
-        fetchFiveDayWeather(city);
+       fetchFiveDayWeather(city);
        searchInput.value = "";
     }
-    // saveSearch();
+    pastSearch();
 }
+
 
 
 //  current day weather fetch
@@ -33,13 +36,14 @@ function fetchCurrentWeather(city) {
         return results.json();
     })
     .then(function(data)    {
+        console.log(data);  
         displayCurrentWeather(data, city);
     })
 }
-// function saveSearch() {
-//     localStorage.setItem('cities', data.city.name)
-//     console.log('save seraches', data.city.name)
-//  }
+// var savedSearch = function(){
+//     localStorage.setItem("cities", JSON.stringify(data.name));
+// }
+
 // // weather = data from line 26
 function displayCurrentWeather(weather, cityName) {
     var city = document.createElement('h3');
@@ -63,26 +67,31 @@ function displayCurrentWeather(weather, cityName) {
     windEl.textContent = 'Wind speed: ' + weather.wind.speed + 'mph';
 
     currentWeather.append(city, dateEl,icon, tempEl, humidityEl, windEl);  
+    
+    var cityName = weather.name;
+    console.log("this is the data", weather.name);
+    storedCityName = JSON.parse(localStorage.getItem("cityName")) || [];
+    storedCityName.push(cityName);
+    localStorage.setItem("cityName", JSON.stringify(storedCityName));
 }
 
 
 // five day weather fetch
 function fetchFiveDayWeather(city) {
-    const apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
-    const fiveDayWeather = document.getElementById('fiveday-weather');
-   
-    fetch(apiUrlForecast)
-    .then((results) => {  
+        const apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
+        const fiveDayWeather = document.getElementById('fiveday-weather');
+
+        fetch(apiUrlForecast)
+        .then((results) => {  
         return results.json();
-    })
-    .then((data) => {   
+        })
+        .then((data) => {   
         displayFiveDayWeather(data);
-    });
+        });
    
  }
  function displayFiveDayWeather(allWeatherData) {
     var fiveDayForecast = allWeatherData.list;
-    console.log("five", fiveDayForecast);
     for (var i = 0; i < fiveDayForecast.length; i=i+8) {
        
         var cardEl= document.createElement('div');
@@ -120,15 +129,22 @@ function fetchFiveDayWeather(city) {
         displayFiveDay.append(cardEl);  
 }
 }
-// var pastSearches = function(event) {
-//     var pastCityEl = document.createElement("button");
-//     pastCityEl.textContent = //past city?;
-// }
-// pastCityEl.addEventListener("click", pastSearches);
 
-// displayFiveDayWeather(data.list[i]);
-// history- on click for past city buttons will just need to run the city search again
+var pastSearch = function(pastSearches) {
+  var  pastSearchEl = document.createElement("button");
+    pastSearchEl.textContent = pastSearches;
+    pastSearchEl.classList = "d-flex w-100 btn-light border p-2";
+    pastSearchEl.setAttribute("data-city", pastSearches);
+    pastSearchEl.setAttribute("type", "submit");
+    pastSearchBtnEl.prepend.apply(pastSearchEl);
+}
 
-// for the 5 day: call it at the same time you cal display current weather- pass over data.cord.lat, data.cord.long
-// fetchFiveDay- going to do the same thing as 21-25 only with the forecast URL var apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
-//  data.list- 40 elements of forecast for 5 days. loop over that list and make a card with the data just like display current weather but loop with a +=8- 
+var pastSearchHistory = function(event){
+    var city = event.target.getAttribute("data-city")
+    if(city){
+        fetchCurrentWeather(city);
+        fetchFiveDayWeather(city);
+    }
+    pastSearchBtnEl.addEventListener("click", pastSearchHistory);
+}
+
