@@ -8,7 +8,7 @@ var currentWeather = document.getElementById('current-weather');
 var submitbtn = document.getElementById('citySearch');
 var searchInput = document.querySelector('input');
 var displayFiveDay = document.getElementById('display-five-day');
-var pastSearchBtnEl = document.querySelector("#past-search-buttons");
+var pastSearchBtnEl = document.getElementById("past-search-btns");
 
 submitbtn.addEventListener('click', searchSubmit);
 
@@ -20,14 +20,14 @@ function searchSubmit(event) {
         return;
     } else {
         var city = searchInput.value.toUpperCase().trim();
+        $("#display-five-day").empty();
+        $("#current-weather").empty();
        fetchCurrentWeather(city);
        fetchFiveDayWeather(city);
        searchInput.value = "";
     }
-    pastSearch();
+    pastSearch(city);
 }
-
-
 
 //  current day weather fetch
 function fetchCurrentWeather(city) {
@@ -130,21 +130,19 @@ function fetchFiveDayWeather(city) {
 }
 }
 
-var pastSearch = function(pastSearches) {
-  var  pastSearchEl = document.createElement("button");
-    pastSearchEl.textContent = pastSearches;
-    pastSearchEl.classList = "d-flex w-100 btn-light border p-2";
-    pastSearchEl.setAttribute("data-city", pastSearches);
-    pastSearchEl.setAttribute("type", "submit");
-    pastSearchBtnEl.prepend.apply(pastSearchEl);
-}
+var pastSearch = function(cityName) {
+    var  pastSearchEl = document.createElement("button");
+    pastSearchEl.textContent = cityName;
+    pastSearchEl.classList = "d-flex w-100 past-search-city btn-light border p-2";
+    pastSearchEl.id = `${cityName}`
+    pastSearchEl.setAttribute("data-city", cityName);
+    pastSearchBtnEl.append(pastSearchEl);
 
-var pastSearchHistory = function(event){
-    var city = event.target.getAttribute("data-city")
-    if(city){
-        fetchCurrentWeather(city);
-        fetchFiveDayWeather(city);
-    }
-    pastSearchBtnEl.addEventListener("click", pastSearchHistory);
+    $(`#${cityName}`).on("click", function() {
+        $("#display-five-day").empty();
+        $("#current-weather").empty();
+        fetchCurrentWeather($(this).attr("data-city"));
+        fetchFiveDayWeather($(this).attr("data-city"));
+      });
 }
 
