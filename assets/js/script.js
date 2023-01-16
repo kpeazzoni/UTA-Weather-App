@@ -1,8 +1,5 @@
-// var apiKey = '2ea0ff78c58ceb45b6e3b5e1c308163c';
-const apiKey = 'ea1cfe6f6396974dcf51cb771e7643a2';
 
-// 7ab439372a6b7834b1058543aced3bee
-// 2ea0ff78c58ceb45b6e3b5e1c308163c
+const apiKey = 'ea1cfe6f6396974dcf51cb771e7643a2';
 
 let currentWeather = document.getElementById('current-weather');
 let submitbtn = document.getElementById('citySearch');
@@ -25,8 +22,9 @@ function searchSubmit(event) {
         fetchCurrentWeather(city);
         fetchFiveDayWeather(city);
         searchInput.value = "";
+        pastSearch(city);
     }
-    pastSearch(city);
+    
 }
 
 //  current day weather fetch
