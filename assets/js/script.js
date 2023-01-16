@@ -68,8 +68,6 @@ function displayCurrentWeather(weather, cityName) {
 
         currentWeather.append(city, dateEl,icon, tempEl, humidityEl, windEl);  
         
-        let cityName = weather.name;
-        console.log("this is the data", weather.name);
         storedCityName = JSON.parse(localStorage.getItem("cityName")) || [];
         storedCityName.push(cityName);
         localStorage.setItem("cityName", JSON.stringify(storedCityName));
@@ -138,6 +136,9 @@ let pastSearch = function(cityName) {
         pastSearchEl.setAttribute("data-city", cityName);
         pastSearchBtnEl.append(pastSearchEl);
 
+
+// cityName = weather.name, "display-five-day = var pointing to document.getElementById('display-five-day');, currentWeather = document.getElementById('current-weather');,    pastSearchEl.setAttribute("data-city", cityName);
+   
     $(`#${cityName}`).on("click", function() {
         $("#display-five-day").empty();
         $("#current-weather").empty();
